@@ -1,0 +1,26 @@
+{
+  "name": "binary-chat-backend",
+  "version": "1.0.1",
+  "description": "Serverless backend for the binary-tree-chat application",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anthony Drury",
+  "license": "ISC",
+  "dependencies": {
+    "fork-ts-checker-webpack-plugin": "^4.1.6",
+    "serverless-offline": "^6.4.0",
+    "serverless-webpack": "^5.3.2",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.5",
+    "uuid": "^8.3.1",
+    "webpack": "^4.43.0",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.64",
+    "@types/aws-sdk": "^2.7.0",
+    "@types/node": "^14.14.6"
+  }
+}
