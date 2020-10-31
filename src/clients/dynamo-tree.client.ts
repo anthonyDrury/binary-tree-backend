@@ -1,6 +1,5 @@
 import { APIGatewayProxyResult } from "aws-lambda";
 import { DynamoDB } from "aws-sdk";
-import { UpdateItemOutput } from "aws-sdk/clients/dynamodb";
 import { v4 as uuidv4 } from "uuid";
 
 const dynamoDb = new DynamoDB.DocumentClient();
@@ -20,12 +19,13 @@ export async function createNewNode(
     },
   };
 
-  const prevRes:
-    | APIGatewayProxyResult
-    | UpdateItemOutput = await updatePrevNodeChild(id, newId);
+  const prevRes: APIGatewayProxyResult | true = await updatePrevNodeChild(
+    id,
+    newId
+  );
 
   // If updating the head fails do not create the child
-  if ((prevRes as UpdateItemOutput).Attributes === undefined) {
+  if (prevRes !== true) {
     return prevRes as APIGatewayProxyResult;
   }
 
@@ -52,14 +52,12 @@ export async function createNewNode(
       return err;
     }
   );
-
-  return;
 }
 
 export async function updatePrevNodeChild(
   headId: string,
   childId: string
-): Promise<APIGatewayProxyResult | DynamoDB.DocumentClient.UpdateItemOutput> {
+): Promise<APIGatewayProxyResult | true> {
   const params: DynamoDB.DocumentClient.UpdateItemInput = {
     TableName: binaryTreeTable,
     Key: {
@@ -86,8 +84,8 @@ export async function updatePrevNodeChild(
       });
     }
   ).then(
-    (result) => {
-      return result;
+    (_) => {
+      return true;
     },
     (err) => {
       return err;
