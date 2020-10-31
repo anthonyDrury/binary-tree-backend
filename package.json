@@ -1,10 +1,10 @@
 {
   "name": "binary-chat-backend",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Serverless backend for the binary-tree-chat application",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "offline": "serverless offline --logOutput --httpPort 5000"
   },
   "author": "Anthony Drury",
   "license": "ISC",
